@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey - Anniversary Edition 🎮</title>
+    <!-- Google Font Pixel Art -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        body {
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Container Frame Rasio 9:16 HP */
+        .game-screen {
+            width: 100vw;
+            height: 100vh;
+            max-width: 414px;
+            max-height: 736px;
+            background: #5c94fc; /* Warna Langit Retro */
+            position: relative;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* SWIPER / SLIDE CONTAINER */
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* --- SLIDE 1: START & PASSWORD --- */
+        #slide1 {
+            background: linear-gradient(to bottom, #6b8cff, #a0b5ff);
+        }
+
+        .mario-title {
+            color: #ffe600;
+            font-size: 1.2rem;
+            text-shadow: 3px 3px #e60000;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn-pixel {
+            background: #e60000;
+            color: #fff;
+            border: 4px solid #fff;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 6px #800000;
+            margin-top: 15px;
+            border-radius: 6px;
+        }
+
+        .btn-pixel:active {
+            box-shadow: 0 2px #800000;
+            transform: translateY(4px);
+        }
+
+        .pass-box {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            text-align: center;
+            border: 3px solid #000;
+            background: #fff;
+            outline: none;
+        }
+
+        /* --- SLIDE 2: ROADMAP PERJALANAN --- */
+        #slide2 {
+            background: #7ec850; /* Rumput */
+            justify-content: flex-start;
+            padding-top: 15px;
+            overflow-y: auto;
+        }
+
+        .roadmap-header {
+            color: #fff;
+            font-size: 1rem;
+            text-shadow: 2px 2px #000;
+            margin-bottom: 15px;
+        }
+
+        .map-container {
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding-bottom: 80px;
+        }
+
+        .road-node {
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 10px;
+            padding: 10px;
+            width: 85%;
+            box-shadow: 4px 4px #000;
+            position: relative;
+        }
+
+        .road-node img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border: 2px solid #000;
+            border-radius: 6px;
+        }
+
+        .road-node p {
+            font-size: 0.6rem;
+            color: #000;
+            margin-top: 8px;
+            line-height: 1.3;
+        }
+
+        /* Character Kucing Oren */
+        .cat-avatar {
+            width: 45px;
+            height: 45px;
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            z-index: 10;
+        }
+
+        /* --- SLIDE 3: VIDEO PENUTUP --- */
+        #slide3 {
+            background: #000;
+            padding: 10px;
+        }
+
+        video {
+            width: 100%;
+            max-height: 80%;
+            border: 3px solid #fff;
+            border-radius: 8px;
+        }
+
+        .error-msg {
+            color: #e60000;
+            font-size: 0.55rem;
+            margin-top: 8px;
+            text-shadow: 1px 1px #fff;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTAINER 9:16 -->
+    <div class="game-screen">
+
+        <!-- AUDIO BACKGROUND MARIO -->
+        <audio id="marioAudio" loop>
+            <source src="mario.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- SLIDE 1: START & LOCK SCREEN -->
+        <div class="slide active" id="slide1">
+            <div class="mario-title">SUPER ANNIVERSARY<br>BROSS! 🪷🌙</div>
+            
+            <button class="btn-pixel" id="startBtn" onclick="showPass()">PRESS START</button>
+
+            <div class="pass-box" id="passBox">
+                <input type="password" id="passInput" placeholder="PASSCODE" maxlength="4">
+                <span class="error-msg" id
